@@ -1,16 +1,17 @@
-# This is a sample Python script.
+from win32gui import GetForegroundWindow
+import psutil
+import time
+import win32process
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+process_time = {}
+timestamp = {}
+while True:
+    current_app = psutil.Process(win32process.GetWindowThreadProcessId(GetForegroundWindow())[1]).name().replace(".exe",
+                                                                                                                 "")
+    timestamp[current_app] = int(time.time())
+    time.sleep(1)
+    if current_app not in process_time.keys():
+        process_time[current_app] = 0
+    process_time[current_app] = process_time[current_app] + int(time.time()) - timestamp[current_app]
+    print(process_time)
+# https://dev.to/tkkhhaarree/track-windows-app-usage-time-using-python-h9h
