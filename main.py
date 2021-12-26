@@ -3,6 +3,8 @@ import psutil
 import time
 import win32process
 
+# to get this to work on anything post Python 3.6, do pip install pywin32 and pip install psutil
+
 process_time = {}
 timestamp = {}
 while True:
