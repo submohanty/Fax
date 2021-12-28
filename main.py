@@ -1,9 +1,13 @@
+from PyQt5 import QtWidgets
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from win32gui import GetForegroundWindow
 import psutil
 import time
 import win32process
 import matplotlib.pyplot as plt
-
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
 
 def windowTracker():
     process_time = {}
@@ -20,7 +24,15 @@ def windowTracker():
         print(process_time)
         x += 1
         if (x == 10):  # TODO: change this to a button or a keyboard signal that stops the timer and returns your converted graph or even the timer ending at the end of the day (for now it's set at 10 seconds for testing purposes)
-            return process_time
+            #return process_time
+            labels, sizes = zip(*process_time.items())
+            fig1, ax1 = plt.subplots()
+            ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
+                    shadow=True, startangle=90)
+            ax1.axis('equal')
+            plt.title("Your App Usage")
+            plt.show()
+            return
 
 
 def plotTestData(x):
@@ -33,5 +45,27 @@ def plotTestData(x):
     plt.show()
 
 
-x = windowTracker()
-plotTestData(x)
+def main():
+    app = QApplication(sys.argv)
+    win = QMainWindow()
+    win.setGeometry(400, 400, 400, 300)
+    win.setWindowTitle("Fax")
+    # Label
+    label = QLabel(win)
+    label.setText("Press this button in order to start the screen time tracking")
+    label.setFont(QFont("Consolas", 12))
+    label.move(0, 25)
+    label.setAlignment(Qt.AlignCenter)
+    label.setWordWrap(True)
+    label.adjustSize()
+    # Button
+    button = QtWidgets.QPushButton(win)
+    button.setText("Begin")
+    button.move(150,100)
+    button.clicked.connect(windowTracker)
+    #
+    win.show()
+    sys.exit(app.exec_())
+
+main()
+
