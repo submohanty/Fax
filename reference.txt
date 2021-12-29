@@ -1,0 +1,6 @@
+PyQt5:
+x is to the right, and y is down
+setGeometry(x, y, width, height)
+move(x, y)
+adjustSize() will change the size of label according to the length of the text, if the length is less it will decrease the length and height of the widget and vice versa
+showMaximized() replaces show() at the end of the gui() function
