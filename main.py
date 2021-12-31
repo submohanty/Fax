@@ -56,6 +56,7 @@ def keyPressEvent(self, e):
             self.showMaximized()
 
 
+
 def gui():
     extra = {
         'font_family': 'Roboto',
@@ -84,7 +85,12 @@ def gui():
     button.move(885, 400)
     button.clicked.connect(windowTracker)
     #
-    # TODO: Add a button that stops the timer
+    button1 = QtWidgets.QPushButton(win)
+    button1.setText("End")
+    button1.setGeometry(0, 0, 100, 100)
+    button1.move(885, 600)
+    button1.clicked.connect(win.close)
+
     # TODO: Add a way for the user to collapse the window into the tray
 
     win.showMaximized()
