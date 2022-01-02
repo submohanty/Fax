@@ -1,0 +1,4 @@
+Show bar chart across week with the screentime for each day of the week in hours
+Show a dotted line with the avrerage
+Show a separate bar chart on the bottom with the usage across each hour of the day
+Separate the daily bar chart with the different categories of apps like social entertainment productivity etc.
